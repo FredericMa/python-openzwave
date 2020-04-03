@@ -50,6 +50,7 @@ except NameError:
     PY3 = True
 
 TOOLSETS = {
+    16.0: ['v142', '16.0'],  # vs2019
     15.0: ['v141', '15.0'],  # vs2017
     14.0: ['v140', '14.0'],  # vs2015
     10.0: ['v100', '4.0'],  # vs2010
@@ -240,7 +241,11 @@ def setup_build_environment(openzwave, build_type):
     if 'DISTUTILS_USE_SDK' in os.environ:
         target_platform = os.environ['WINDOWSSDKVERSION'].replace('\\', '')
 
-        if 'VS150COMNTOOLS' in os.environ:
+        if 'VS160COMNTOOLS' in os.environ:
+            msbuild_version = 16.0
+            solution_dest = 'vs2019'
+
+        elif 'VS150COMNTOOLS' in os.environ:
             msbuild_version = 15.0
             solution_dest = 'vs2017'
 
